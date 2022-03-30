@@ -41,8 +41,20 @@
             <p id="answer-options"></p>
             <p id="response-message"></p>
         </div>
-        <!-- <button id="goBack">Go back to main page</button>
-        <a href="scores.html"><button>Hall of Fame</button></a> -->
+    </main>
+
+    <main id="score-screen" class="hide">
+        <h2>Congratulations, you finished the quiz! Your tallied score is:</h2>
+        <div id="score-tally">
+            <p>Time left: <span id="end-time"></span></p>
+            <p>Points earned: <span id="end-points"></span></p>
+            <h2>Final score: <span id="final-score"></span></h2>
+            <p>
+                Submit your name below to enter the <em>(local)</em> HALL OF FAME!<br/>
+                <input type="text" id="name"><br/>
+                <button id="submit-button">To the annals of <em>(local)</em> history!</button>
+            </p>
+        </div>
     </main>
 
     <script src="./assets/js/script.js"></script>

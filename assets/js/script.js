@@ -4,29 +4,49 @@ var questionScreen = document.getElementById("main-quiz");
 
 // Button variables
 var startButton = document.getElementById("quiz-start");
-// var backButton = document.getElementById("goBack");
+var submitButton = document.getElementById("submit-button");
 
 // Quiz variables
 var qList = [
     {
-        question: "Placeholder question 1",
-        choices: ["1A","B","C","D"],
-        answer: "1A"
+        question: "Which of the following statements about the DOM is correct?",
+        choices: [
+            "DOM stands for 'Document Object Model' and is the data representation of the objects that comprise the structure and content of an HTML file",
+            "DOM stands for 'Document Object Manager' and is a software intermediary that allows sites to interface with one another",
+            "DOM stands for 'Document Object Model' and is a software intermediary that allows sites to interface with one another",
+            "DOM stands for 'Document Object Manager' and is the data representation of the objects that comprise the structure and content of an HTML file"
+        ],
+        answer: "DOM stands for 'Document Object Model' and is the data representation of the objects that comprise the structure and content of an HTML file"
     },
     {
-        question: "Placeholder question 2",
-        choices: ["2A","2B","2C","2D"],
-        answer: "2B"
+        question: "Inside which HTML element do you put a JavaScript and what is the correct syntax for referring to an external script called 'script.js'?",
+        choices: [
+            "<header href='script.js'></header>",
+            "<script src='script.js'><script>",
+            "<link rel='JavaScript' href='script.js'>",
+            "<html scr='script.js'>"
+        ],
+        answer: "<script src='script.js'><script>"
     },
     {
-        question: "Placeholder question 3",
-        choices: ["3A","3B","3C","3D"],
-        answer: "3C"
+        question: "How would you start a loop that increments by 1 and loops a maximum of 10 times?",
+        choices: [
+            "for {i = 0; i <= 10; i++} ()",
+            "for (i = 0; i <= 10; i++) {}",
+            "for (i = 0; i < 10; i++) {}",
+            "for {i = 0; i < 10; i++} ()"
+        ],
+        answer: "for (i = 0; i < 10; i++) {}"
     },
     {
-        question: "Placeholder question 4",
-        choices: ["4A","4B","4C","4D"],
-        answer: "4D"
+        question: "What is the correct JavaScript syntax to change the text content of an HTML element with the ID main-banner?",
+        choices: [
+            "document.getElementByClass('main-banner').textContent = \"Welcome!\"",
+            "document.getElementById(#main-banner).textContent = \"Welcome!\"",
+            "#main-banner.textContent = \"Welcome!\"",
+            "document.getElementById('main-banner').textContent = \"Welcome!\""
+        ],
+        answer: "document.getElementById('main-banner').textContent = \"Welcome!\""
     }
 ];
 var questionNum = 0;
@@ -40,7 +60,11 @@ var timerInterval;
 
 // Scoreboard variables
 var scoreEl = document.getElementById("scoreboard");
+var scoreScreen = document.getElementById("score-screen");
 var scoredPoints = 0;
+var endTimeEl = document.getElementById("end-time");
+var endPointsEl = document.getElementById("end-points");
+var finalScoreEl = document.getElementById("final-score");
 
 // Start quiz button function
 function startQuiz () {
@@ -74,7 +98,6 @@ function countdownTimer () {
             timeLeft.textContent = "Out of time!";
         }
     }, 1000)
-    console.log("coutndown called");
 }
 
 // Show quiz questions function
@@ -100,16 +123,22 @@ function quizQuestions() {
 
 // End quiz function
 function endQuiz() {
-    clearInterval(timerInterval);   
-    console.log("quiz end function called");
+    var endTime = secondsLeft;
+    var endPoints = scoredPoints;
+    var totalPoints = scoredPoints + secondsLeft;
+    clearInterval(timerInterval);
+
+    questionScreen.setAttribute("class","hide");
+
+    scoreScreen.setAttribute("class","show");
+
+    endTimeEl.textContent = endTime;
+    endPointsEl.textContent = endPoints;
+    finalScoreEl.textContent = totalPoints;
 }
 
 // Question answer logic function
 function questionLogic() {
-    console.log("button press registered");
-    console.log(this.dataset.answerchoice);
-    console.log(qList[questionNum].answer);
-
     if (this.dataset.answerchoice === qList[questionNum].answer){
         scoredPoints += 25;
         correctResponse();
@@ -124,7 +153,6 @@ function questionLogic() {
 
     if (questionNum === qList.length) {
         endQuiz();
-        console.log(secondsLeft);
 
         if (secondsLeft === 1) {
             timeLeft.textContent = secondsLeft + " second left!";
@@ -143,15 +171,12 @@ function questionLogic() {
 
 // Scoreboard function
 function scoreboard() {
-    console.log("scoreboard function called");
-    
     scoreEl.textContent = scoredPoints;
 }
 
 function correctResponse() {
     responseMessage.textContent = "Correct! +25 points!";
     responseMessage.setAttribute("class","show");
-    console.log("called correct response");
 
     setTimeout(function() {
         responseMessage.setAttribute("class","hide");
@@ -161,11 +186,15 @@ function correctResponse() {
 function incorrectResponse() {
     responseMessage.textContent = "Incorrect! 15 seconds deducted!";
     responseMessage.setAttribute("class","show");
-    console.log("called incorrect response");
 
     setTimeout(function() {
         responseMessage.setAttribute("class","hide");
     },1500);
 }
 
+function recordName() {
+    console.log("it's recorded! but not really");
+}
+
 startButton.onclick = startQuiz;
+submitButton.onclick = recordName;

@@ -15,6 +15,6 @@ Access the deployed site [through the following link](https://colinbrindle.githu
 ### **Site Screenshots**
 ![First site screenshot](/assets/images/site1.png)
 
-![Second site screenshot](/assets/images/site2.png))
+![Second site screenshot](/assets/images/site2.png)
 
-![Third site screenshot](/assets/images/site3.png))
+![Third site screenshot](/assets/images/site3.png)
